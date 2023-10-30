@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/formulario.css">
+    <title>login form</title>
+</head>
+
+
+<body>
+    <div class="form-container">
+
+        <h3>registrate en los formularios</h3>
+        <div class="buttons">
+            <button class="google-btn">
+                <picture>
+                    <img src="../img/icon google.png" alt="logo de google">
+                </picture>
+                <span>registrate con Google</span>
+            </button>
+            <button class="twiter-btn">
+                <picture>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSl05VI1uvfLf1d9oJybFJSAiqNEcebN-rSNg&usqp=CAU"
+                        alt="logo de twiter" srcset="">
+                </picture>
+            </button>
+        </div>
+
+        <div class="separetor">
+            <hr>
+            <span>Or</span>
+            <hr>
+        </div>
+        <form action="" method="get">
+            <div class="sections-inputs">
+                <label for="name" name="name">
+                    <span>name</span>
+                    <input type="text" name="name" required />
+                </label>
+                <label for="username" name="username">
+                    <span>username</span>
+                    <input type="text" name="username" required /></label>
+            </div>
+            <label for="email" name="email">
+                <span>email</span>
+                <input type="email" name="email" required />
+            </label>
+            <label for="password" name="password">
+                <span>password</span>
+                <input type="password" name="password" placeholder="6+ characters" required />
+            </label>
+            <label for="checkbox" name="checkbox" class="checkbox-label">
+                <span> al crear la cuenta acepto <a href="" target="_blank">las condiciones y terminos del aviso
+                        legal</a> </span>
+                <input type="checkbox" name="checkbox" required />
+            </label>
+        </form>
+        <button type="submit" class="submit-button">crear cuenta</button>
+        <span>¿ya eres miembro? <a class="span-footer
+            " href="#" target="_blank">iniciar secion</a></span>
+    </div>
+</body>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500&display=swap');
+</style>
+
+</html>
