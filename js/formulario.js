@@ -83,9 +83,14 @@
     btn.querySelector(".btn__label").textContent = "Enviando…";
 
     fetch(endpoint, { method: "POST", body: new URLSearchParams(d) })
-      .then(function (r) { return r.json(); })
+      .then(function (r) {
+        return r.text().then(function (t) {
+          try { return JSON.parse(t); }
+          catch (_) { var e = new Error("respuesta"); e.tipo = "respuesta"; throw e; }
+        });
+      })
       .then(function (res) {
-        if (!res || !res.ok) throw new Error((res && res.error) || "error");
+        if (!res || !res.ok) { var e = new Error((res && res.error) || "error"); e.tipo = "servidor"; throw e; }
         form.reset();
         campoCual.hidden = true;
         form.hidden = true;
@@ -94,7 +99,13 @@
       })
       .catch(function (err) {
         if (window.console) console.error("Error al enviar:", err);
-        status.textContent = "No se pudo enviar. Revisa tu conexión e inténtalo de nuevo.";
+        if (err && err.tipo === "servidor") {
+          status.textContent = "No se pudo guardar: " + err.message;
+        } else if (err && err.tipo === "respuesta") {
+          status.textContent = "La base de datos no respondió bien. Revisa que la implementación tenga acceso para «Cualquiera».";
+        } else {
+          status.textContent = "No se pudo enviar. Revisa tu conexión e inténtalo de nuevo.";
+        }
         status.classList.add("is-error");
       })
       .finally(function () {
