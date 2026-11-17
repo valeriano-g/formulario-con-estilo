@@ -71,7 +71,7 @@ body {
   padding: 36px 28px 30px;
   background:
     linear-gradient(180deg, rgba(140, 23, 54, .55) 0%, rgba(74, 11, 31, .9) 75%, rgba(46, 6, 20, 1) 100%),
-    url("../img/vino-nuevo.jpg") center 35% / cover no-repeat;
+    url("../img/vino-nuevo.jpg") center 22% / cover no-repeat;
   display: grid; gap: 14px; justify-items: start;
 }
 .tag {
