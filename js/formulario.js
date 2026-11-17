@@ -92,7 +92,8 @@
         gracias.hidden = false;
         gracias.scrollIntoView({ behavior: "smooth", block: "center" });
       })
-      .catch(function () {
+      .catch(function (err) {
+        if (window.console) console.error("Error al enviar:", err);
         status.textContent = "No se pudo enviar. Revisa tu conexión e inténtalo de nuevo.";
         status.classList.add("is-error");
       })

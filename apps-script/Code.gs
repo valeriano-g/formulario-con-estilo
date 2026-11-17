@@ -3,6 +3,10 @@
  * Pega este código en Extensiones → Apps Script de tu hoja y publícalo
  * como Aplicación web (ver README.md).
  */
+// Si el script NO se creó desde la hoja (Extensiones → Apps Script),
+// pega aquí el ID de tu hoja: es la parte de la URL entre /d/ y /edit
+// https://docs.google.com/spreadsheets/d/ESTE_ES_EL_ID/edit
+var ID_HOJA = "";
 var HOJA = "Registros";
 var COLUMNAS = ["Fecha", "Nombre", "Apellido", "Edad", "Condición", "¿Otra congregación?", "¿Cuál?"];
 
@@ -11,9 +15,10 @@ function doPost(e) {
   try {
     lock.waitLock(10000);
     var p = (e && e.parameter) || {};
+    console.log("Datos recibidos: " + JSON.stringify(p));
 
     // Trampa anti-spam: si viene lleno, se ignora en silencio
-    if (p.website) return json({ ok: true });
+    if (p.website) { console.warn("Bloqueado por anti-spam"); return json({ ok: true }); }
 
     var nombre = limpio(p.nombre, 60);
     var apellido = limpio(p.apellido, 60);
@@ -23,16 +28,27 @@ function doPost(e) {
     var cual = otra === "Sí" ? limpio(p.congregacion, 100) : "";
 
     if (!nombre || !apellido || !(edad >= 5 && edad <= 99) || !condicion || !otra || (otra === "Sí" && !cual)) {
+      console.warn("Datos incompletos");
       return json({ ok: false, error: "Datos incompletos" });
     }
 
-    hoja().appendRow([new Date(), nombre, apellido, edad, condicion, otra, cual]);
+    var sh = hoja();
+    sh.appendRow([new Date(), nombre, apellido, edad, condicion, otra, cual]);
+    console.log("Guardado en " + sh.getParent().getName() + " → pestaña " + sh.getName());
     return json({ ok: true });
   } catch (err) {
+    console.error("Error al guardar: " + err);
     return json({ ok: false, error: String(err) });
   } finally {
     lock.releaseLock();
   }
+}
+
+// Ejecuta esta función desde el editor (botón ▶ Ejecutar) para probar
+// la conexión con la hoja sin usar el formulario.
+function probar() {
+  var r = doPost({ parameter: { nombre: "Prueba", apellido: "Editor", edad: "20", condicion: "Invitado", otraCongregacion: "No" } });
+  console.log(r.getContent());
 }
 
 function doGet() {
@@ -40,7 +56,8 @@ function doGet() {
 }
 
 function hoja() {
-  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var ss = ID_HOJA ? SpreadsheetApp.openById(ID_HOJA) : SpreadsheetApp.getActiveSpreadsheet();
+  if (!ss) throw new Error("El script no está vinculado a ninguna hoja. Pega el ID de la hoja en ID_HOJA.");
   var sh = ss.getSheetByName(HOJA) || ss.insertSheet(HOJA);
   if (sh.getLastRow() === 0) {
     sh.appendRow(COLUMNAS);
