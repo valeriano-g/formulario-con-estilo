@@ -100,6 +100,18 @@ body {
 }
 .title span:last-child { font-weight: 700; }
 
+.fecha {
+  margin: 2px 0 0;
+  font-family: var(--f-deco);
+  font-size: clamp(20px, 5.4vw, 26px);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  line-height: 1.35;
+  color: var(--crema);
+}
+.fecha time { display: grid; }
+.fecha span { color: var(--rosa); }
+
 .hero__intro {
   margin: 4px 0 0; max-width: 38ch;
   font-size: 17px; line-height: 1.5; font-weight: 300;
@@ -201,6 +213,7 @@ input[type="number"]::-webkit-inner-spin-button { opacity: .4; }
 
 .thanks { padding: 36px 28px 40px; display: grid; gap: 14px; justify-items: center; text-align: center; animation: drop .4s ease both; }
 .thanks h2 { margin: 0; font: 400 clamp(30px, 8vw, 42px)/1.1 var(--f-display); text-wrap: balance; }
+.thanks__fecha strong { color: var(--crema); font-weight: 600; }
 .thanks p:not(.tag) { margin: 0; color: var(--rosa); font-size: 17px; line-height: 1.5; max-width: 34ch; }
 
 .foot {
@@ -219,6 +232,8 @@ input[type="number"]::-webkit-inner-spin-button { opacity: .4; }
   .choice span { min-width: 0; }
   .tag { letter-spacing: .2em; font-size: 12.5px; padding: 8px 14px; }
   .tag--small { font-size: 12px; }
+  .fecha { font-size: 18px; letter-spacing: .08em; }
+  .btn--ghost { letter-spacing: .08em; font-size: 13.5px; padding-left: 12px; padding-right: 12px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
