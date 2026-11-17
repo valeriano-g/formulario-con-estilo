@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Vino Nuevo · Registro</title>
+  <meta name="description" content="Registro de asistencia — Semana Juvenil Vino Nuevo · Jóvenes FDL">
+  <meta name="theme-color" content="#4a0b1f">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Josefin+Sans:wght@300;400;600&family=Poiret+One&display=swap">
+  <link rel="stylesheet" href="css/vino-nuevo.css">
+</head>
+<body>
+  <!-- Franja tipográfica de fondo, como en el arte del evento -->
+  <div class="marquee" aria-hidden="true">
+    <span>SOY ODRE NUEVO · SOY ODRE NUEVO · SOY ODRE NUEVO · SOY ODRE NUEVO · </span>
+    <span>SOY ODRE NUEVO · SOY ODRE NUEVO · SOY ODRE NUEVO · SOY ODRE NUEVO · </span>
+  </div>
+
+  <main class="card">
+    <header class="hero">
+      <p class="tag">Semana Juvenil</p>
+      <h1 class="title"><span>Vino</span><span>Nuevo</span></h1>
+      <p class="tag tag--small">Marcos 2:21-22</p>
+      <p class="hero__intro">¡Qué alegría tenerte con nosotros! Déjanos tus datos para conocerte mejor.</p>
+    </header>
+
+    <form id="registro" class="form" novalidate>
+      <div class="row">
+        <div class="field">
+          <label for="nombre">Nombre</label>
+          <input id="nombre" name="nombre" type="text" autocomplete="given-name" required maxlength="60" placeholder="Tu nombre">
+          <small class="error" data-for="nombre"></small>
+        </div>
+        <div class="field">
+          <label for="apellido">Apellido</label>
+          <input id="apellido" name="apellido" type="text" autocomplete="family-name" required maxlength="60" placeholder="Tu apellido">
+          <small class="error" data-for="apellido"></small>
+        </div>
+      </div>
+
+      <div class="field field--short">
+        <label for="edad">Edad</label>
+        <input id="edad" name="edad" type="number" inputmode="numeric" min="5" max="99" required placeholder="Ej. 18">
+        <small class="error" data-for="edad"></small>
+      </div>
+
+      <fieldset class="field">
+        <legend>¿Cuál es tu condición?</legend>
+        <div class="choices">
+          <label class="choice"><input type="radio" name="condicion" value="Miembro" required><span>Miembro</span></label>
+          <label class="choice"><input type="radio" name="condicion" value="Invitado"><span>Invitado</span></label>
+        </div>
+        <small class="error" data-for="condicion"></small>
+      </fieldset>
+
+      <fieldset class="field">
+        <legend>¿Formas parte de otra congregación?</legend>
+        <div class="choices">
+          <label class="choice"><input type="radio" name="otraCongregacion" value="Sí" required><span>Sí</span></label>
+          <label class="choice"><input type="radio" name="otraCongregacion" value="No"><span>No</span></label>
+        </div>
+        <small class="error" data-for="otraCongregacion"></small>
+      </fieldset>
+
+      <div class="field reveal" id="campoCual" hidden>
+        <label for="congregacion">¿Cuál congregación?</label>
+        <input id="congregacion" name="congregacion" type="text" maxlength="100" placeholder="Nombre de tu iglesia">
+        <small class="error" data-for="congregacion"></small>
+      </div>
+
+      <!-- Trampa anti-spam: invisible para personas -->
+      <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+      <button type="submit" class="btn" id="enviar">
+        <span class="btn__label">Enviar registro</span>
+      </button>
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+    </form>
+
+    <section class="thanks" id="gracias" hidden>
+      <p class="tag">¡Gracias!</p>
+      <h2>Tu registro llegó</h2>
+      <p>Nos alegra que seas parte de esta semana. ¡Dios te bendiga!</p>
+      <button type="button" class="btn btn--ghost" id="otro">Registrar a otra persona</button>
+    </section>
+
+    <footer class="foot">
+      <span>Iglesia Asamblea de Dios Fuente de Luz</span>
+      <span class="foot__brand">Jóvenes FDL</span>
+    </footer>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/formulario.js"></script>
+</body>
+</html>
